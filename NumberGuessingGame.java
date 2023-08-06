@@ -3,8 +3,11 @@ import java.util.Scanner;
 
 public class NumberGuessingGame {
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    /**
+     * @param args
+     */
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
         Random random = new Random();
         int minNumber = 1;
         int maxNumber = 100;
@@ -25,7 +28,7 @@ public class NumberGuessingGame {
                 System.out.print("Enter your guess: ");
                 int guess;
                 try {
-                    guess = Integer.parseInt(scanner.nextLine());
+                    guess = Integer.parseInt(sc.nextLine());
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input! Please enter a valid number.");
                     continue;
@@ -49,14 +52,16 @@ public class NumberGuessingGame {
             }
 
             System.out.print("Do you want to play again? (yes/no): ");
-            String playAgainInput = scanner.nextLine().toLowerCase();
-            playAgain = playAgainInput.equals("yes") || playAgainInput.equals("y");
+            String playAgainInput = sc.nextLine().toLowerCase();
+            playAgain = playAgainInput.equals("yes") | playAgainInput.equals("y");
         }
 
         double averageAttempts = (double) totalAttempts / totalRounds;
         System.out.printf("%nGame Over. Your final score based on average attempts per round: %.2f%n", averageAttempts);
     
-    // Close the scanner
-    scanner.close();}
     
+    sc.close();
+    
+    }
+
 }
