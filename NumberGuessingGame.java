@@ -1,12 +1,9 @@
-import java.util.Random;
+ import java.util.Random;
 import java.util.Scanner;
 
 public class NumberGuessingGame {
 
-    /**
-     * @param args
-     */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Random random = new Random();
         int minNumber = 1;
@@ -23,6 +20,8 @@ public class NumberGuessingGame {
             int targetNumber = random.nextInt(maxNumber - minNumber + 1) + minNumber;
             int attempts = 0;
             totalRounds++;
+
+            System.out.println("New round started. You have " + maxAttempts + " attempts.");
 
             while (attempts < maxAttempts) {
                 System.out.print("Enter your guess: ");
@@ -45,6 +44,10 @@ public class NumberGuessingGame {
                 } else {
                     System.out.println("Too high. Try again.");
                 }
+
+                if (attempts < maxAttempts) {
+                    System.out.println("You have " + (maxAttempts - attempts) + " attempts left.");
+                }
             }
 
             if (attempts == maxAttempts) {
@@ -53,15 +56,17 @@ public class NumberGuessingGame {
 
             System.out.print("Do you want to play again? (yes/no): ");
             String playAgainInput = sc.nextLine().toLowerCase();
-            playAgain = playAgainInput.equals("yes") | playAgainInput.equals("y");
+            playAgain = playAgainInput.equals("yes") || playAgainInput.equals("y");
         }
 
-        double averageAttempts = (double) totalAttempts / totalRounds;
-        System.out.printf("%nGame Over. Your final score based on average attempts per round: %.2f%n", averageAttempts);
-    
-    
-    sc.close();
-    
-    }
+        if (totalRounds > 0) {
+            double averageAttempts = (double) totalAttempts / totalRounds;
+            System.out.printf("%nGame Over. Your final score based on average attempts per round: %.2f%n", averageAttempts);
+        } else {
+            System.out.println("No rounds were played. Goodbye!");
+        }
 
+        sc.close();
+    }
 }
+
